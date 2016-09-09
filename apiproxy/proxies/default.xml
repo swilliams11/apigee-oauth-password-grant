@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProxyEndpoint name="default">
+    <Description>default</Description>
+    <PreFlow name="PreFlow">
+        <Request/>
+    </PreFlow>
+    <Flows>
+        <Flow name="Get Access Token - Password grant type">
+            <Request>
+                <Step>
+                    <Name>BasicAuth</Name>
+                </Step>
+                <Step>
+                    <Name>VerifyAPIKey</Name>
+                </Step>
+                <Step>
+                    <Name>RaiseFault.UnauthorizedClient</Name>
+                    <Condition>verifyapikey.VerifyAPIKey.failed = "true" OR verifyapikey.VerifyAPIKey.client_secret != flow.request.consumerSecret</Condition>
+                </Step>
+                <Step>
+                    <Name>ExtractVariables.TokenRequest</Name>
+                </Step>
+                <Step>
+                    <Name>ServiceCallout.Okta</Name>
+                </Step>
+                <Step>
+                    <Name>ExtractVariables.Okta</Name>
+                </Step>
+                <Step>
+                    <Name>RaiseFault.InvalidUsernamePassword</Name>
+                    <Condition>flow.login.result != "success"</Condition>
+                </Step>
+                <Step>
+                    <Name>OAuthV2.Password</Name>
+                </Step>
+            </Request>
+            <Condition>(flow.request.grantType = "password") and (request.verb = "POST") and ( request.path MatchesPath "/token")</Condition>
+        </Flow>
+    </Flows>
+    <PostFlow name="PostFlow">
+        <Response/>
+    </PostFlow>
+    <RouteRule name="No Route"/>
+    <HTTPProxyConnection>
+	    <BasePath>/oauth2-password</BasePath>
+        <VirtualHost>secure</VirtualHost>
+    </HTTPProxyConnection>
+</ProxyEndpoint>

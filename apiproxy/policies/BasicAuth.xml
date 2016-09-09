@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<BasicAuthentication async="false" continueOnError="true" enabled="true" name="BasicAuth">
+    <Operation>Decode</Operation>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <User ref="flow.request.consumerKey"/>
+    <Password ref="flow.request.consumerSecret"/>
+    <Source>request.header.Authorization</Source>
+</BasicAuthentication>

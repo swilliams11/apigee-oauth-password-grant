@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ExtractVariables name="ExtractVariables.TokenRequest" continueOnError="true">
+    <Source>request</Source>
+    <JSONPayload>
+        <Variable name="grantType" type="string">
+            <JSONPath>$.grant_type</JSONPath>
+        </Variable>
+        <Variable name="username" type="string">
+            <JSONPath>$.username</JSONPath>
+        </Variable>
+        <Variable name="password" type="string">
+            <JSONPath>$.password</JSONPath>
+        </Variable>
+        <Variable name="enterpriseid" type="integer">
+            <JSONPath>$.enterpriseid</JSONPath>
+        </Variable>
+    </JSONPayload>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <VariablePrefix>flow.request</VariablePrefix>
+</ExtractVariables>

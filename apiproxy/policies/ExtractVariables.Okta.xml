@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ExtractVariables name="ExtractVariables.Okta" continueOnError="true">
+    <Source>oktaResponse</Source>
+    <JSONPayload>
+        <Variable name="result" type="string">
+            <JSONPath>$.result</JSONPath>
+        </Variable>
+        <Variable name="username" type="string">
+            <JSONPath>$.username</JSONPath>
+        </Variable>
+        <Variable name="enterpriseid" type="integer">
+            <JSONPath>$.enterpriseid</JSONPath>
+        </Variable>
+    </JSONPayload>
+    <VariablePrefix>flow.login</VariablePrefix>
+</ExtractVariables>
