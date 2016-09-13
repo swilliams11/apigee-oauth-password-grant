@@ -4,8 +4,9 @@
 This proxy implements the password grant.  You must make changes to the proxy as outlined below.
 
 
-1. There is a service callout named ServiceCallout.Okta 
-must be changed so that it calls out to Okta using the (Okta API)[http://developer.okta.com/docs/api/resources/authn.html].
+1. There is a service callout named ServiceCallout.Okta
+must be changed so that it calls out to Okta using the [Okta API](http://developer.okta.com/docs/api/resources/authn.html).
+[Okta Authentication API](http://developer.okta.com/docs/api/resources/authn.html#authentication-operations)
 
 2. The ExtractVariables.Okta request must be updated to extract the variables from the Okta response.
 
@@ -45,7 +46,7 @@ curl -X POST \
 -H 'Authorization: Basic {Base64encode(clientid:secret)' \
 -d '{"grant_type":"password", "username":"the-user-name", "password":"the-users-password", "enterpriseid":"enterpriseid"}' \
 https://{hostname}/oauth2-password/token -d ""
-``` 
+```
 
 ## Other Items
 
@@ -59,6 +60,5 @@ An important step is to validate that the service callout was successful before 
 ```
 
 ## Fault Handling
-This proxy does not have any fault handling included, so it should be implemented by including a Fault Rule on the 
-proxy and target endpoints. 
-
+This proxy does not have any fault handling included, so it should be implemented by including a Fault Rule on the
+proxy and target endpoints.
