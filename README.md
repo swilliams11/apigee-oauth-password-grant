@@ -4,9 +4,8 @@
 This proxy implements the password grant.  You must make changes to the proxy as outlined below.
 
 
-1. There is a service callout named ServiceCallout.Okta
-must be changed so that it calls out to Okta using the [Okta API](http://developer.okta.com/docs/api/resources/authn.html).
-[Okta Authentication API](http://developer.okta.com/docs/api/resources/authn.html#authentication-operations)
+1. There is a service callout named ServiceCallout.Okta must be changed so that it calls out to Okta using the [Okta API](http://developer.okta.com/docs/api/resources/authn.html).
+* [Okta Authentication API](http://developer.okta.com/docs/api/resources/authn.html#authentication-operations)
 
 2. The ExtractVariables.Okta request must be updated to extract the variables from the Okta response.
 
