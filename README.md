@@ -20,7 +20,7 @@ This proxy implements the password grant.  You must make changes to the proxy as
 }' "https://{your_okta_org}.com/api/v1/authn"
   ```
   * Successful response
-```
+  ```
 {
   "expiresAt": "2015-11-03T10:15:57.000Z",
   "status": "SUCCESS",
