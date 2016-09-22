@@ -7,6 +7,41 @@ This proxy implements the password grant.  You must make changes to the proxy as
 1. There is a service callout named ServiceCallout.Okta must be changed so that it calls out to Okta using the [Okta API](http://developer.okta.com/docs/api/resources/authn.html).
   * [Okta Authentication API](http://developer.okta.com/docs/api/resources/authn.html#authentication-operations)
 
+  * sample curl command to validate a user in Okta
+  ```
+  curl -v -X POST -H "Accept: application/json" -H "Content-Type: application/json" -d '{
+  "username": "user@domain.com",
+  "password": "password",
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to",
+  "options": {
+    "multiOptionalFactorEnroll": false,
+    "warnBeforePasswordExpired": false
+  }
+}' "https://{your_okta_org}.com/api/v1/authn"
+  ```
+  * Successful response
+```
+{
+  "expiresAt": "2015-11-03T10:15:57.000Z",
+  "status": "SUCCESS",
+  "relayState": "/myapp/some/deep/link/i/want/to/return/to",
+  "sessionToken": "00FpzfWiw4LDOBL_9pe",
+  "_embedded": {
+    "user": {
+      "id": "GTSWTBKOLGLNR",
+      "passwordChanged": "2015-09-08T20:14:45.000Z",
+      "profile": {
+        "login": "dae.muphy@example.com",
+        "firstName": "Dae",
+        "lastName": "Muphy",
+        "locale": "en_US",
+        "timeZone": "America/Los_Angeles"
+      }
+    }
+  }
+}
+```
+
 2. The ExtractVariables.Okta request must be updated to extract the variables from the Okta response.
 
 3. Modify the ExtractVariables.TokenRequest policy so that extracts the appropriate values from password grant payload.

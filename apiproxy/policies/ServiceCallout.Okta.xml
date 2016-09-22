@@ -6,23 +6,26 @@
                 <Header name="Accept">application/json</Header>
             </Headers>
             <Verb>POST</Verb>
-            <FormParams>
-                <FormParam name="username">{flow.request.username}</FormParam>
-                <FormParam name="password">{flow.request.password}</FormParam>
-            </FormParams>
+            <Payload contentType="application/json" variablePrefix="@" variableSuffix="#">
+            {
+            "username": "@flow.request.username#",
+            "password": "@flow.request.password#",
+            "relayState": "/myapp/some/deep/link/i/want/to/return/to",
+            "options": {
+              "multiOptionalFactorEnroll": false,
+              "warnBeforePasswordExpired": false
+            }
+          }
+        </Payload>
         </Set>
         <IgnoreUnresolvedVariables>false</IgnoreUnresolvedVariables>
     </Request>
     <Response>oktaResponse</Response>
-    <!--HTTPTargetConnection>
-        <URL>https://${apigee.orga}-test.apigee.net/mock/login</URL>
+    <HTTPTargetConnection>
+        <URL>https://{your_okta_org}.com/api/v1/authn</URL>
         <SSLInfo>
             <Enabled>true</Enabled>
         </SSLInfo>
-    </HTTPTargetConnection-->
-    <LocalTargetConnection>
-        <APIProxy>mock-api-myds</APIProxy>
-        <ProxyEndpoint>default</ProxyEndpoint>
-        <Path>/mock-myds/login</Path>
-    </LocalTargetConnection>
+    </HTTPTargetConnection>
+
 </ServiceCallout>
